@@ -1,1 +1,2 @@
-# -FUT-Champions-Ultimate-Team-PHP
+# FUT Team Builder for PHP
+ 

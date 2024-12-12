@@ -1,0 +1,56 @@
+.terain {
+  background-position: center;
+  background-size: cover;
+  object-fit: cover;
+  grid-template-rows: repeat(15, minmax(0, 1fr));
+}
+.imgremplacement {
+  width: 80px;
+}
+
+.card , #remplacemmentfilter {
+  
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    background-color: rgba(17, 25, 40, 0.5);
+  
+}
+.form {
+  background-color: #111927;
+  background-image: radial-gradient(
+    
+      hsl(162, 77%, 40%) 0,
+      transparent 59%
+    ),
+    radial-gradient(at 82% 83%, hsl(218, 39%, 11%) 0, transparent 55%);
+  
+    border: 1px solid rgba(255, 255, 255, 0.125);
+
+    overflow-y:scroll ;
+}
+.form::-webkit-scrollbar{
+    width: 10px;
+}
+#remplacemmentfilter > .droping{
+  opacity: 0.3;
+}
+
+ 
+ 
+.validate{
+  border: 2px solid red;
+}
+.noValidate{
+  border: 2px solid greenyellow;
+  
+
+}
+.posicard{
+  right: -20px;
+  bottom:60px;
+}
+.navbar{
+  background-color: aqua;
+}
+
+ 
