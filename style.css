@@ -20,7 +20,7 @@
   background-image: radial-gradient(
     
       hsl(162, 77%, 40%) 0,
-      transparent 59%
+      transparent 80%
     ),
     radial-gradient(at 82% 83%, hsl(218, 39%, 11%) 0, transparent 55%);
   
@@ -53,4 +53,6 @@
   background-color: aqua;
 }
 
- 
+.active{
+  background-color: aquamarine;
+}

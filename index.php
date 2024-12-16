@@ -11,7 +11,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
     <!-- <link rel="stylesheet" href="./assets/css/output.css" /> -->
-    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="stylesheet" href="style.css" />
    
   
    
@@ -22,7 +22,9 @@
  <div class="flex  navbar w-[90%] mx-auto px-4 items-center py-1 mt-2 rounded-lg bg-[#404040] justify-between  ">
   <h1 class="text-2xl text-white">FOOT</h1>
   <div class="">
+<a href="./pages/Players.php">
  <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">ADMIN</button>
+ </a>
  </div>
  </div>
       
@@ -48,7 +50,7 @@
             </button>
           </div>
           </div>
-          <div class="ST  bg-red-500 relative row-start-1 md:col-start-6 col-start-5 col-span-2 row-span-4  rounded-lg md:w-[120px] md:h-[150px] w-[100px] h-[150px]" data-position="ST" >
+          <div class="ST bg-red-500 relative row-start-1 md:col-start-6 col-start-5 col-span-2 row-span-4  rounded-lg md:w-[120px] md:h-[150px] w-[100px] h-[150px]" data-position="ST" >
             <div class="btnAdd  w-full h-full flex justify-center items-center ">
               <button class="ST1 btnST" id="ST1" >
                 <img src="./assets/svgs/add.svg" class="ST1" alt="">
