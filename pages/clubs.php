@@ -61,9 +61,9 @@ $result = $conn->query($sql);
 
 
     <div class="tableclub relative w-full h-full">
-    <div class="relative overflow-x-auto shadow-md h-full">
+    <div class="relative overflow-x-auto shadow-md bg-slate-700 h-full">
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 w-full sticky top-0 z-10">
+            <thead class="text-xs text-black uppercase bg-white w-full sticky top-0 z-10">
                 <tr>
                     <th scope="col" class="px-6 py-3">
                         id-club
@@ -82,7 +82,7 @@ $result = $conn->query($sql);
             <tbody class="bg-white dark:bg-gray-800">
                 <?php
                 while ($row = $result->fetch_assoc()) {
-                    echo '<tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">';
+                    echo '<tr class=" border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">';
                     echo '<th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">';
                     echo ($row['id_Club']);
                     echo '</th>';
@@ -93,7 +93,7 @@ $result = $conn->query($sql);
                     echo '<img src="' .($row['logo']) . '" alt="Club Logo" class="h-10 w-10 object-contain">';
                     echo '</td>';
                     echo '<td class="flex mt-3 gap-2 h-full px-2 py-4">';
-                    echo '<a href="add.php?id=' .($row['id_Club']) . '" class="text-blue-500 font-bold">AJOUTE</a>';
+                    echo '<a href="../club/update.php?id='.($row['id_Club']) . '" class="text-blue-500 font-bold">UPDATE</a>';
                     echo '<a href="../club/delate.php?id='.($row['id_Club']) . '" class="text-red-500 font-bold">DELETE</a>';
                     echo '</td>';
                     echo '</tr>';
