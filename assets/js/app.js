@@ -1,13 +1,17 @@
 const ajoute = document.querySelector('.ajou')
 const form = document.querySelector(".form")
+
 const table = document.querySelector(".tables")
 const select = document.querySelector(".select")
-const formPlay =document.querySelector(".formPlay")
-const formGK =document.querySelector(".formGK")
-// ajou.addEventListener("click", ()=>{
-//     form.classList.toggle('hidden')
-//     table.classList.remove("hidden")
-// })
+const formPlay = document.querySelector(".formPlay")
+const formGK = document.querySelector(".formGK")
+
+
+ajoute.addEventListener("click", ()=>{
+    form.classList.toggle('hidden')
+    table.classList.toggle("hidden")
+}) 
+
 
 select.addEventListener("change", ()=>{
     if (select.value == "GK") {
