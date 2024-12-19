@@ -2,11 +2,24 @@
 // Include database connection
 include '../conn/database.php';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Get form data and escape for security
-    $clubName = mysqli_real_escape_string($conn, $_POST['clubName']);
-    $clubLogo = mysqli_real_escape_string($conn, $_POST['clubLogo']);
+if ($_GET["id"]) {
+    $clubName=$_POST['clubName'];
+    $clubLogo=$_POST['clubLogo'];
+    $id = $_POST['id'];
+    $query = "UPDATE club 
+    SET club = '$clubName' , logo ='$clubLogo'
+    WHERE id_Club = '$id'";
+    $requet = mysqli_query($conn,$query);
+    if (isset($requet)) {
+        header("Location: ../pages/clubs.php"); 
+        exit();
+    }
+    
+}
+else{
 
+    $clubName=$_POST['clubName'];
+    $clubLogo=$_POST['clubLogo'];
     // Insert query
     $sql = "INSERT INTO club (club, logo) VALUES ('$clubName', '$clubLogo')";
 
@@ -18,7 +31,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Error: " . mysqli_error($conn); 
     }
 
+}
+
     // Close the connection
     mysqli_close($conn);
-}
+
 ?>
