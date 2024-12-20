@@ -48,18 +48,14 @@ CREATE TABLE PLAYERS (
     `rating` INT NOT NULL,
     `id_nationality` INT NOT NULL,
     `id_Club` INT NOT NULL,
-    `id_phisiquePlayers` INT NOT NULL,
-    `id_phisiqueGK` INT NOT NULL,
-    FOREIGN KEY (`id_phisiquePlayers`) REFERENCES `phisique_players`(`id_phisiquePlayers`),
-    FOREIGN KEY (`id_nationality`) REFERENCES `Nationality`(`id_nationality`),
-    FOREIGN KEY (`id_Club`) REFERENCES `Club`(`id_Club`),
-    FOREIGN KEY (`id_phisiqueGK`) REFERENCES `phisique_GK`(`id_phisiqueGK`)
+    `id_phisiquePlayers` INT NULL,
+    `id_phisiqueGK` INT NULL,
+    `imgPlayer` VARCHAR(255),
+    FOREIGN KEY (`id_phisiquePlayers`) REFERENCES `phisique_players`(`id_phisiquePlayers`) ON DELETE CASCADE,
+    FOREIGN KEY (`id_nationality`) REFERENCES `Nationality`(`id_nationality`) ON DELETE CASCADE,
+    FOREIGN KEY (`id_Club`) REFERENCES `Club`(`id_Club`) ON DELETE CASCADE,
+    FOREIGN KEY (`id_phisiqueGK`) REFERENCES `phisique_GK`(`id_phisiqueGK`) ON DELETE CASCADE
 );
 
 
-
-ALTER TABLE players ADD COLUMN imgPlayer VARCHAR(255) AFTER fullName;
-
-ALTER TABLE players MODIFY COLUMN id_phisiquePlayers INT;
-ALTER TABLE players MODIFY COLUMN id_phisiquePlayers INT NULL;
-ALTER TABLE players MODIFY COLUMN id_phisiqueGK INT NULL;
+DROP DATABASE IF EXISTS FUT;
