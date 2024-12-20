@@ -6,13 +6,6 @@ const select = document.querySelector(".select")
 const formPlay = document.querySelector(".formPlay")
 const formGK = document.querySelector(".formGK")
 
-
-ajoute.addEventListener("click", ()=>{
-    form.classList.toggle('hidden')
-    table.classList.toggle("hidden")
-}) 
-
-
 select.addEventListener("change", ()=>{
     if (select.value == "GK") {
         formPlay.classList.add('hidden')

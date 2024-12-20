@@ -1,5 +1,18 @@
 <?php
 
+include "../conn/database.php";
+if (isset($_POST["submit"])) {
+
+
+
+
+
+
+
+
+}
+    
+
 
 ?>
 
@@ -381,61 +394,81 @@
                      </tr>
                    </thead>
                    <tbody>
-                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+    <?php
+    include "../conn/database.php";
 
-                       <th scope="row" class="px-2 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                         001
-                       </th>
-                       <td class="px-2 py-4 ">
-                       Lionel Messi
-                       </td>
-                       <td class="px-2 py-4">
-                        <img src="https://cdn.sofifa.net/players/158/023/25_120.png" alt="">
-                       </td>
-                       <td class="px-2 py-4">
-                       RW
-                       </td>
-                       <td class="px-2 py-4">
-                       Argentina
-                       </td>
-                       <td class="px-2 py-4">
-                         <img src="https://cdn.sofifa.net/flags/ar.png" alt="">
-                       </td>
-                       <td class="px-2 py-4">
-                       Inter Miami
-                       </td>
-                       <td class="px-2 py-4">
-                       <img src="https://cdn.sofifa.net/meta/team/239235/120.png" alt="">
-                       </td>
-                       <td class="px-2 py-4">
-                       93
-                       </td>
-                       <td class="px-2 py-4">
-                       93
-                       </td>
-                       <td class="px-2 py-4">
-                       93
-                       </td>
-                       <td class="px-2 py-4">
-                       93
-                       </td>
-                       <td class="px-2 py-4">
-                       93
-                       </td>
-                       <td class="px-2 py-4">
-                       93
-                       </td>
-                       <td class="px-2 py-4">
-                       93
-                       </td>
-                       <td class="flex  mt-3 gap-2 h-full  px-2 py-4 ">
-                         <button class="text-blue-500 font-bold"  >AJOUTE</button>
-                        <button class="text-red-500 font-bold">DELATE</button>
-                       </td>
-                     
-                     </tr>
+    $query = "
+    SELECT players.id_Player, players.fullName, players.imgPlayer, players.position, players.rating, 
+           phisique_gk.diving, phisique_gk.handling, phisique_gk.kicking, phisique_gk.reflexes, phisique_gk.speed, phisique_gk.positioning, 
+           phisique_players.pace, phisique_players.shooting, phisique_players.passing, phisique_players.dribbling, phisique_players.defending, phisique_players.physical, 
+           Club.club AS nameClub, Club.logo, 
+           Nationality.nationality, Nationality.flag
+    FROM players
+    LEFT JOIN phisique_gk ON players.id_phisiqueGK = phisique_gk.id_phisiqueGK
+    LEFT JOIN phisique_players ON players.id_phisiquePlayers = phisique_players.id_phisiquePlayers
+    JOIN Club ON players.id_Club = Club.id_Club
+    JOIN Nationality ON players.id_nationality = Nationality.id_nationality
+    ";
 
-                   </tbody>
+    $requet = mysqli_query($conn, $query);
+    if (!$requet) {
+        die("Error: " . mysqli_error($conn));
+    }
+
+    while ($player = mysqli_fetch_assoc($requet)): ?>
+        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+            <th scope="row" class="px-2 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                <?= $player['id_Player'] ?>
+            </th>
+            <td class="px-2 py-4 ">
+                <?= $player['fullName'] ?>
+            </td>
+            <td class="px-2 py-4">
+                <img src="<?= $player['imgPlayer'] ?>" alt="">
+            </td>
+            <td class="px-2 py-4">
+                <?= $player['position'] ?>
+            </td>
+            <td class="px-2 py-4">
+                <?= $player['nationality'] ?>
+            </td>
+            <td class="px-2 py-4">
+                <img src="<?= $player['flag'] ?>" alt="">
+            </td>
+            <td class="px-2 py-4">
+                <?= $player['nameClub'] ?>
+            </td>
+            <td class="px-2 py-4">
+                <img src="<?= $player['logo'] ?>" alt="">
+            </td>
+            <td class="px-2 py-4">
+                <?= $player['rating'] ?>
+            </td>
+            <td class="px-2 py-4">
+                <?= $player['pace'] ?? $player['diving'] ?>
+            </td>
+            <td class="px-2 py-4">
+                <?= $player['shooting'] ?? $player['handling'] ?>
+            </td>
+            <td class="px-2 py-4">
+                <?= $player['passing'] ?? $player['kicking'] ?>
+            </td>
+            <td class="px-2 py-4">
+                <?= $player['dribbling'] ?? $player['reflexes'] ?>
+            </td>
+            <td class="px-2 py-4">
+                <?= $player['defending'] ?? $player['speed'] ?>
+            </td>
+            <td class="px-2 py-4">
+                <?= $player['physical'] ?? $player['positioning'] ?>
+            </td>
+            <td class="flex mt-3 gap-2 h-full px-2 py-4">
+                <button class="text-blue-500 font-bold">AJOUTE</button>
+                <button class="text-red-500 font-bold">DELATE</button>
+            </td>
+        </tr>
+    <?php endwhile; ?>
+</tbody>
                  </table>
                </div>
              </div>

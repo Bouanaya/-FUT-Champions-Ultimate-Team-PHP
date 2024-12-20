@@ -57,3 +57,9 @@ CREATE TABLE PLAYERS (
 );
 
 
+
+ALTER TABLE players ADD COLUMN imgPlayer VARCHAR(255) AFTER fullName;
+
+ALTER TABLE players MODIFY COLUMN id_phisiquePlayers INT;
+ALTER TABLE players MODIFY COLUMN id_phisiquePlayers INT NULL;
+ALTER TABLE players MODIFY COLUMN id_phisiqueGK INT NULL;

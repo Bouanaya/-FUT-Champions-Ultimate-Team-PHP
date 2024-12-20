@@ -33,7 +33,7 @@ $id = $_GET["id"];
                                 <input type="text" id="nationality" name="nationality" placeholder="Enter Nationality " value="<?php if (isset($_GET["id"])) {echo $nationality ;}?>" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                             </div>
                             <div class="mb-4 ">
-                            <input type="text" name="id" value="<?php if (isset($_GET['id'])) {
+                            <input type="hidden" name="id" value="<?php if (isset($_GET['id'])) {
                         echo $_GET["id"];
                     }else{
                         echo '';

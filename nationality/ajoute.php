@@ -24,7 +24,7 @@ else{
     $query ="INSERT INTO nationality (nationality,flag ) VALUES('$nationality','$flag')";
 
     // Execute query and check for success
-    if (mysqli_query($conn, $sql)) {
+    if (mysqli_query($conn,$query)) {
         header("Location: ../pages/nationality.php"); 
         exit();
     } else {
