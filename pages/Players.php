@@ -247,8 +247,14 @@ if (isset($_POST["submit"])) {
                 <?= $player['physical'] ?? $player['positioning'] ?>
             </td>
             <td class="flex mt-3 gap-2 h-full px-2 py-4">
-                <button class="text-blue-500 font-bold">AJOUTE</button>
-                <button class="text-red-500 font-bold">DELATE</button>
+              
+              
+
+                <a href="../players/update.php" class="text-blue-500 font-bold">AJOUTE</a>
+                <a href="../players/delete.php?id=<?= $player['id_Player'] ?>
+                
+                
+                " class="text-red-500 font-bold">DELATE</a>
             </td>
         </tr>
     <?php endwhile; ?>

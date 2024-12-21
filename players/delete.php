@@ -1,6 +1,6 @@
 <?php
 include "../conn/database.php";
-$id = $_POST['id'];
+$id = $_GET['id'];
 echo $id;
  
 $query = "DELETE FROM players WHERE id_Player = '$id'";
