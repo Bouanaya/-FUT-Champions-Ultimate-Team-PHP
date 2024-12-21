@@ -1,6 +1,7 @@
 <?php
 include "../conn/database.php";
-$id = $_GET['id'];
+$id = $_POST['id'];
+
  
 $query = "DELETE FROM nationality WHERE id_nationality = '$id'";
 $requet = mysqli_query($conn , $query);

@@ -2,7 +2,7 @@ CREATE DATABASE FUT;
 USE FUT;
 
 CREATE TABLE Nationality (
-    `id_nationality` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `id_nationality` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
     `nationality` VARCHAR(100) NOT NULL,
     `flag` VARCHAR(100) NOT NULL
 );
