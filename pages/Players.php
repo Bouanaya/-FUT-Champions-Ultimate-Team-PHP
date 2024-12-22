@@ -250,7 +250,10 @@ if (isset($_POST["submit"])) {
               
               
 
-                <a href="../players/update.php" class="text-blue-500 font-bold">AJOUTE</a>
+                <a href="../form/formPlayer.php?id=<?=
+                $player['id_Player']
+                
+                ?>" class="text-blue-500 font-bold"  >AJOUTE</a>
                 <a href="../players/delete.php?id=<?= $player['id_Player'] ?>
                 
                 

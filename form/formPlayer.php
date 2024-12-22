@@ -6,6 +6,33 @@ $query = "SELECT * FROM nationality";
 $requet = mysqli_query($conn, $query);
 $requetclub = mysqli_query($conn, $queryclub);
 
+
+if (isset($_GET['id'])) {
+    $id = $_GET["id"];
+    $query = "
+    SELECT players.id_Player, players.fullName, players.imgPlayer, players.position, players.rating, 
+           phisique_gk.diving, phisique_gk.handling, phisique_gk.kicking, phisique_gk.reflexes, phisique_gk.speed, phisique_gk.positioning, 
+           phisique_players.pace, phisique_players.shooting, phisique_players.passing, phisique_players.dribbling, phisique_players.defending, phisique_players.physical, 
+           Club.club AS nameClub, Club.logo, 
+           Nationality.nationality, Nationality.flag
+    FROM players
+    LEFT JOIN phisique_gk ON players.id_phisiqueGK = phisique_gk.id_phisiqueGK
+    LEFT JOIN phisique_players ON players.id_phisiquePlayers = phisique_players.id_phisiquePlayers
+    JOIN Club ON players.id_Club = Club.id_Club
+    JOIN Nationality ON players.id_nationality = Nationality.id_nationality
+    where players.id_Player = '$id'
+    ";
+
+$requet = mysqli_query($conn, $query);
+$requets = mysqli_query($conn, $query);
+$row = mysqli_fetch_assoc($requets);
+var_dump($row);
+$position= $row['position'];
+$clubname = $row['nameClub'] ;
+
+}
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,6 +64,11 @@ $requetclub = mysqli_query($conn, $queryclub);
                     type="text"
                     id="namePlayer"
                     name="namePlayer"
+                    value="<?php
+                    if (isset($_GET['id'])) {
+                        echo $row['fullName'];
+                    } 
+                    ?>"
                     class="name reset bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Full-Name" />
 
@@ -51,6 +83,15 @@ $requetclub = mysqli_query($conn, $queryclub);
                         id="imgPlayer"
                         name="imgPlayer"
                         type="text"
+                        value="<?php
+                        if(isset($_GET['id'])){
+                            echo $row['imgPlayer'];}
+                            else{
+                                echo'';
+                            }
+                        
+                        
+                        ?>"
                         placeholder="enter your url imge" />
                 </div>
 
@@ -60,13 +101,25 @@ $requetclub = mysqli_query($conn, $queryclub);
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nationality</label>
                     <select
                         id="Nationality"
+                        
                         name="nationality"
                         class="bg-gray-50 border px-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        <?php
-                        echo '<option value="">select position</option>';
-                        while ($row = mysqli_fetch_assoc($requet)) {
-                            echo "<option value='" . $row['id_nationality'] . "'>" . $row['nationality'] . "</option>";
-                        }
+                   <?php
+               echo '<option selected  value="">'.$row['nationality'].'</option>';
+                   if (isset($_GET['id'])) {
+                    echo '<option  value="' . $row['id_nationality'] . '">'.$row['nationality'].'</option>';
+                    while ($row = mysqli_fetch_assoc($requet)) {
+                        echo "<option value='" . $row['id_nationality'] . "'>" . $row['nationality'] . "</option>";
+                        ;
+                   }
+                }
+                else{
+                    echo '<option value="">select position</option>';
+                    while ($row = mysqli_fetch_assoc($requet)) {
+                        echo "<option value='" . $row['id_nationality'] . "'>" . $row['nationality'] . "</option>";
+                    }
+                }
+                      
                         ?>
 
                     </select>
@@ -80,8 +133,25 @@ $requetclub = mysqli_query($conn, $queryclub);
                     <select
                         name="positionPlayer"
                         id="positionPlayer"
+                     
+                        
                         class="select bg-gray-50 border px-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        <option value="">select position</option>
+                        <option selected value="
+                    <?php
+                     if (isset($_GET['id'])) {
+                        echo $position;
+                     }
+                     ?>">
+
+<?php
+                     if (isset($_GET['id'])) {
+                        echo $position;
+                     }
+                     ?>
+                     
+                    </option>
+                        
+                  
                         <option value="lW">lW</option>
                         <option value="ST">ST</option>
                         <option value="RW">RW</option>
@@ -102,12 +172,14 @@ $requetclub = mysqli_query($conn, $queryclub);
                         name="nameClub"
                         class=" bg-gray-50 border px-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <?php
-                        echo '<option value="">select position</option> ';
+                        echo '<option value="">select club</option> ';
+                     
                         while (
                             $row = mysqli_fetch_assoc($requetclub)
                         ) {
                             echo '<option value="' . $row['id_Club'] . '">' . $row['club'] . '</option>';
                         }
+                      
                         ?>
                     </select>
                 </div>
@@ -127,6 +199,11 @@ $requetclub = mysqli_query($conn, $queryclub);
                                 aria-describedby="helper-text-explanation"
                                 class="reset number bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="0-99"
+                                value="<?php
+                                if (isset($_GET['id'])) {
+                                    echo $row['rating'];
+                                }
+                                ?>"
                                 min="10"
                                 max="99" />
                         </div>
@@ -141,6 +218,14 @@ $requetclub = mysqli_query($conn, $queryclub);
                                 aria-describedby="helper-text-explanation"
                                 class="reset number pacePlayer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="0-99"
+                                value="
+                                <?php
+                                if (isset($_GET['id'])) {
+                                    echo $row['pace'];
+                                }
+                                ?>
+                                
+                                "
                                 name="pacePlayer" />
                         </div>
 
@@ -227,6 +312,16 @@ $requetclub = mysqli_query($conn, $queryclub);
                                 aria-describedby="helper-text-explanation"
                                 class="numbergk bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="0-99"
+                                value="
+                                <?php
+                                if(isset($_GET['id'])){
+                                    echo $row['diving'];
+                                }
+                                
+                                
+                                ?>
+                                
+                                "
                                 min="10"
                                 max="99" />
                         </div>
@@ -318,7 +413,17 @@ $requetclub = mysqli_query($conn, $queryclub);
                     id="submitButton"
                     name="submit"
                     class="text-white bg-gradient-to-r  from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
-                    submit
+                    <?php
+                    if(isset($_GET['id'])){
+                        echo "Update";}
+                    else{
+                        echo "Submit";
+                    }
+                
+                    
+                    
+                
+                    ?>
                 </button>
 
         </form>
