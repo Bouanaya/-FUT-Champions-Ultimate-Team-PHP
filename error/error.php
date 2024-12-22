@@ -24,7 +24,12 @@ $error_message = isset($_GET['error_message']) ? htmlspecialchars($_GET['error_m
             
             ?></h1>
             <p class="text-xl text-gray-700 mb-4"><?php echo "error is ". htmlspecialchars($_GET['id'])?></p>
-            <a href="../form/" class="bg-blue-500 text-white px-4 py-2 rounded-lg">Retour FORM</a>
+            <a href="../form/<?php
+            if (isset($_SERVER['HTTP_REFERER'])) {
+                echo basename($_SERVER['HTTP_REFERER']);
+               
+            } 
+            ?>" class="bg-blue-500 text-white px-4 py-2 rounded-lg">Retour FORM</a>
         </div>
     </div>
 </body>
