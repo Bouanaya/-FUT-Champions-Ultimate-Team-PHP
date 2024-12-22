@@ -29,7 +29,7 @@ if (isset($_POST["submit"])) {
    <script src="https://cdn.tailwindcss.com"></script>
  </head>
 
- <body class="relative">
+ <body class="relative bg-slate-700">
    <div class="fixed w-screen h-screen">
      <div class="grid grid-cols-6 relative">
        <div class=" col-span-1 col-start-1  h-screen">

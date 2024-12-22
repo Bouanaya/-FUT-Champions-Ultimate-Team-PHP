@@ -2,8 +2,11 @@
 
 include "../conn/database.php";
 
+
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
+  
+
     $query = "SELECT * FROM club WHERE id_Club = '$id'";
     $requet = mysqli_query($conn, $query);
     $row = mysqli_fetch_assoc($requet);

@@ -1,10 +1,28 @@
 <?php
-// Include database connection
 include '../conn/database.php';
+include '../validate/culb-nationality.php';
+
 
 if ($_GET["id"]) {
-    $clubName=$_POST['clubName'];
-    $clubLogo=$_POST['clubLogo'];
+    $clubName= validatecarater($_POST['clubName']); 
+    $clubLogo= validateurl($_POST['clubLogo']);
+   if ($clubName == "false" || $clubLogo == "false") {
+    if ($clubName == "false") {
+        echo"<script>alert('Invalid club name');</script>";
+        header("Location: ../error/error.php?id=nameclub");
+    }
+    if ($clubLogo == "false") {
+        echo"<script>alert('Invalid url');</script>";
+        header("Location: ../error/error.php?id=urllogo");
+
+    }
+
+  
+   
+  
+     
+   }
+   else {
     $id = $_POST['id'];
     $query = "UPDATE club 
     SET club = '$clubName' , logo ='$clubLogo'
@@ -13,13 +31,25 @@ if ($_GET["id"]) {
     if (isset($requet)) {
         header("Location: ../pages/clubs.php"); 
         exit();
+   }
+    
     }
     
 }
 else{
-
-    $clubName=$_POST['clubName'];
-    $clubLogo=$_POST['clubLogo'];
+    $clubName= validatecarater($_POST['clubName']); 
+    $clubLogo= validateurl($_POST['clubLogo']);
+    if ($clubName == "false" || $clubLogo == "false") {
+        if ($clubName == "false") {
+            echo"<script>alert('Invalid club name');</script>";
+            header("Location: ../error/error.php?id=nameclub");
+        }
+        if ($clubLogo == "false") {
+            echo"<script>alert('Invalid url');</script>";
+            header("Location: ../error/error.php?id=urllogo");
+        }
+       }
+       else {
     // Insert query
     $sql = "INSERT INTO club (club, logo) VALUES ('$clubName', '$clubLogo')";
 
@@ -31,6 +61,7 @@ else{
         echo "Error: " . mysqli_error($conn); 
     }
 
+}
 }
 
     // Close the connection

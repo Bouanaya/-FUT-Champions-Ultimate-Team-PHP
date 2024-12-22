@@ -1,11 +1,5 @@
 <?php
 include "../conn/database.php"
- 
-
-
-
-
-
 ?>
 
 

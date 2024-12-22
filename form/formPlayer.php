@@ -16,6 +16,13 @@ $requetclub = mysqli_query($conn, $queryclub);
     <title>Document</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css" />
+
+    <style>
+        input:out-of-range{
+            border: 1px solid red;
+           
+        }
+    </style>
 </head>
 
 <body>
