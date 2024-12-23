@@ -1,6 +1,5 @@
 <?php
 include "../conn/database.php";
-
 $queryclub = "SELECT * FROM club";
 $query = "SELECT * FROM nationality";
 $requet = mysqli_query($conn, $query);
@@ -26,7 +25,6 @@ if (isset($_GET['id'])) {
 $requet = mysqli_query($conn, $query);
 $requets = mysqli_query($conn, $query);
 $row = mysqli_fetch_assoc($requets);
-var_dump($row);
 $position= $row['position'];
 $clubname = $row['nameClub'] ;
 
@@ -54,10 +52,29 @@ $clubname = $row['nameClub'] ;
 
 <body>
     <div class="h-screen w-full flex justify-center fixed bg-slate-800 ">
-        <form class="form bg-slate-800 w-3/4 p-2 " id="form" method="POST" action="../players/update.php">
+        <form class="form bg-slate-800 w-3/4 p-2 " id="form" method="<?php
+        if (isset($_GET["id"])) {
+            echo "GET";
+        }
+        else{
+            echo "POST";
+        }
+        
+        
+        ?>" action="<?php
+        if (isset($_GET["id"])) {
+             echo "../players/update.php?id=".$_GET["id"]."";
+        }
+        else{
+            echo "../players/update.php";
+        }
+        
+        
+        ?>">
             <h1 class="text-white  md:text-3xl ">ENTER INFO</h1>
             <div class="mb-2">
                 <label
+
                     for="namePlayer"
                     class="block  mb-2 text-sm font-medium text-gray-900 dark:text-white">Full Name</label>
                 <input
@@ -71,6 +88,20 @@ $clubname = $row['nameClub'] ;
                     ?>"
                     class="name reset bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Full-Name" />
+                    <input type="hidden" name="id" value ="<?php if (isset($_GET['id'])) {
+                         echo $_GET['id'];
+                    }
+                    else {
+                        null ;
+                    }
+                    
+                    
+                    ?>
+                    ">
+                   
+                     
+                    
+                
 
             </div>
             <div class="flex gap-3">
@@ -129,7 +160,8 @@ $clubname = $row['nameClub'] ;
                 <div class="mb-2 w-1/2">
                     <label
                         for="positionPlayer"
-                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Position</label>
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> position
+                    </label>
                     <select
                         name="positionPlayer"
                         id="positionPlayer"
@@ -142,16 +174,15 @@ $clubname = $row['nameClub'] ;
                         echo $position;
                      }
                      ?>">
-
-<?php
+                    <?php
                      if (isset($_GET['id'])) {
                         echo $position;
                      }
+                     else{
+                        echo "select position";
+                     }
                      ?>
-                     
                     </option>
-                        
-                  
                         <option value="lW">lW</option>
                         <option value="ST">ST</option>
                         <option value="RW">RW</option>
